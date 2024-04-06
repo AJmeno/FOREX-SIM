@@ -28,6 +28,11 @@ def main():
     
     exit_price = st.number_input("Exit Price", value=0.0, step=0.0001)
     
+    if st.button("Add Entry Point"):
+        entry_price = st.number_input("New Entry Price", value=0.0, step=0.0001)
+        units = st.number_input("New Units", min_value=0, value=0, step=1)
+        entries.append((entry_price, units))
+        
     if st.button("Calculate"):
         if entries:
             profit_loss, average_price = calculate_profit_loss(entries, exit_price)
