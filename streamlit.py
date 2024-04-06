@@ -29,9 +29,12 @@ def main():
     exit_price = st.number_input("Exit Price", value=0.0, step=0.0001)
     
     if st.button("Calculate"):
-        profit_loss, average_price = calculate_profit_loss(entries, exit_price)
-        st.write(f"Total Profit/Loss: {profit_loss}")
-        st.write(f"Average Entry Price: {average_price}")
+        if entries:
+            profit_loss, average_price = calculate_profit_loss(entries, exit_price)
+            st.write(f"Total Profit/Loss: {profit_loss}")
+            st.write(f"Average Entry Price: {average_price}")
+        else:
+            st.write("Please input at least one entry point.")
 
 if __name__ == "__main__":
     main()
