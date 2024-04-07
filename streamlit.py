@@ -1,4 +1,7 @@
 import streamlit as st
+import pandas as pd
+import yfinance as yf
+import plotly.graph_objects as go
 
 def calculate_profit_loss(entries, exit_price):
     total_cost = 0
@@ -14,8 +17,33 @@ def calculate_profit_loss(entries, exit_price):
     
     return profit_loss, average_price
 
+def plot_eur_usd_chart():
+    # Fetch EUR/USD data from Yahoo Finance
+    eur_usd = yf.download("EURUSD=X", start="2023-01-01", end="2024-04-07")
+    
+    # Create the chart
+    fig = go.Figure(data=[go.Candlestick(
+        x=eur_usd.index,
+        open=eur_usd['Open'],
+        high=eur_usd['High'],
+        low=eur_usd['Low'],
+        close=eur_usd['Close']
+    )])
+    
+    fig.update_layout(
+        title="EUR/USD Forex Pair",
+        xaxis_title="Date",
+        yaxis_title="Price",
+        xaxis_rangeslider_visible=False
+    )
+    
+    return fig
+
 def main():
     st.title("Currency Pair Profit/Loss Calculator")
+    
+    # Display the EUR/USD chart
+    st.plotly_chart(plot_eur_usd_chart(), use_container_width=True)
     
     entries = []
     
