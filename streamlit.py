@@ -22,14 +22,14 @@ def main():
     st.subheader("Entry Points")
     num_entries = st.number_input("Number of Entry Points", min_value=1, value=1)
     for i in range(num_entries):
-        entry_price = st.number_input(f"Entry Price {i+1}", value=0.0, step=0.00001)
+        entry_price = st.number_input(f"Entry Price {i+1}", value=0.0, step=0.00001, format="%.5f")
         units = st.number_input(f"Units {i+1}", min_value=0, value=0, step=1)
         entries.append((entry_price, units))
     
     exit_price = st.number_input("Exit Price", value=0.0, step=0.00001)
     
     if st.button("Add Entry Point"):
-        entry_price = st.number_input("New Entry Price", value=0.0, step=0.00001)
+        entry_price = st.number_input("New Entry Price", value=0.0, step=0.00001, format="%.5f")
         units = st.number_input("New Units", min_value=0, value=0, step=1)
         entries.append((entry_price, units))
         
